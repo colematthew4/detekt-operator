@@ -1,1 +1,46 @@
-detekt-operator-plugin
+# detekt-operator
+
+Detekt style rules to prefer expressions over named functions for kotlin operators.
+
+[![Build Status](https://img.shields.io/travis/colematthew4/detekt-operator)](https://travis-ci.org/github/colematthew4/detekt-operator)
+[![codecov](https://codecov.io/gh/colematthew4/detekt-operator/branch/master/graph/badge.svg)](https://codecov.io/gh/colematthew4/detekt-operator)
+
+detekt-operator is a plugin for [detekt](https://github.com/arturbosch/detekt) that performs style checking for the use of named functions instead of their operator equivalents.
+
+## Currently Supported Operators
+
+- [ ] Unary Operators
+    - [ ] `a.unaryPlus()` -> `+a`
+    - [ ] `a.unaryMinus()` -> `-a`
+    - [ ] `a.not()` -> `!a`
+- [ ] `a.inc()` -> `a++`
+- [ ] `a.dec()` -> `a--`
+- [ ] Arithmetic Operators
+    - [ ] `a.plus(b)` -> `a + b`
+    - [ ] `a.minus(b)` -> `a - b`
+    - [ ] `a.times(b)` -> `a * b`
+    - [ ] `a.div(b)` -> `a / b`
+    - [ ] `a.rem(b)` -> `a % b`
+    - [ ] `a.rangeTo(b)` -> `a..b`
+- [x] `a.contains(b)` -> `b in a`
+- [ ] `a.get(i[, j...])` -> `a[i(, j...)]`
+- [ ] `a()` -> `a.invoke()`
+- [ ] Augmented Assignments
+    - [ ] `a.plusAssign(b)` -> `a += b`
+    - [ ] `a.minusAssign(b)` -> `a -= b`
+    - [ ] `a.timesAssign(b)` -> `a *= b`
+    - [ ] `a.divAssign(b)` -> `a /= b`
+    - [ ] `a.remAssign(b)` -> `a %= b`
+- [ ] Equality and Inequality Operators
+    - [ ] `a.equals(b)` -> `a == b`
+    - [ ] `!a.equals(b)` -> `a != b`
+- [ ] Infix functions
+
+### Potential Future
+
+- [ ] Comparison Operators
+    - [ ] `a.compareTo(b)` -> `a > b`
+    - [ ] `a.compareTo(b)` -> `a < b`
+    - [ ] `a.compareTo(b)` -> `a >= b`
+    - [ ] `a.compareTo(b)` -> `a <= b`
+- [ ] Property Delegation Operators

@@ -1,0 +1,47 @@
+plugins {
+    id "org.jetbrains.kotlin.jvm" version "1.3.72"
+    id "io.gitlab.arturbosch.detekt" version "1.5.1"
+    id "jacoco"
+}
+
+group "io.cole.matthew.detekt.operator"
+description "Detekt rule to prefer expressions over named functions for kotlin operators"
+version "1.0.0"
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    implementation "io.gitlab.arturbosch.detekt:detekt-api:1.5.0"
+
+    // test
+    testImplementation "io.gitlab.arturbosch.detekt:detekt-test:1.5.0"
+    testImplementation "io.gitlab.arturbosch.detekt:detekt-cli:1.5.0"
+    testImplementation "io.kotest:kotest-assertions-core-jvm:4.0.6"
+    testImplementation "com.squareup:kotlinpoet:1.6.0"
+
+    // junit
+    testImplementation "org.junit.jupiter:junit-jupiter-api:5.6.2"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.6.2"
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+test {
+    useJUnitPlatform()
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        html.enabled true
+    }
+}
