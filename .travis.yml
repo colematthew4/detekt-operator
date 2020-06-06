@@ -8,13 +8,13 @@ jdk: oraclejdk8
 
 before_script:
   - chmod +x gradlew
-  - ls -la build
-  - ls -la build/reports
 
 script:
   - ./gradlew assemble
   - ./gradlew test
   - ./gradlew jacocoTestReport
+  - ls -la build
+  - ls -la build/reports
 
 # From https://github.com/DiscordHooks/travis-ci-discord-webhook
 after_success:
