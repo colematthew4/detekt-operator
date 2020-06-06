@@ -1,16 +1,27 @@
 language: java
 install: true
+sudo: false
+
+# using Discord for build notifications instead
+# see after_success
+notifications:
+  email: false
 
 os: linux
 dist: trusty
 jdk: oraclejdk8
 
+before_script:
+  - chmod +x gradlew
+
 script:
   - ./gradlew assemble
+  - ./gradlew detekt
   - ./gradlew test
   - ./gradlew jacocoTestReport
-  - bash <(curl -s https://codecov.io/bash)
+  - bash <(curl -s https://codecov.io/bash) -Z -f build/reports/jacoco/test/jacocoTestReport.xml
 
+# From https://github.com/DiscordHooks/travis-ci-discord-webhook
 after_success:
   - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
   - chmod +x send.sh

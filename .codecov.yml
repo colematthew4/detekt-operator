@@ -1,0 +1,14 @@
+codecov:
+  require_ci_to_pass: yes
+  ci:
+    - "travis.org"
+
+coverage:
+  precision: 2
+  round: down
+  range: "70...100"
+
+comment:
+  layout: "reach,diff,flags,tree"
+  behavior: default
+  require_changes: no
