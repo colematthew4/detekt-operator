@@ -18,7 +18,7 @@ script:
   - ./gradlew assemble
   - ./gradlew test
   - ./gradlew jacocoTestReport
-  - bash <(curl -s https://codecov.io/bash)
+  - bash <(curl -s https://codecov.io/bash) -f build/reports/jacoco/test/html/index.html
 
 # From https://github.com/DiscordHooks/travis-ci-discord-webhook
 after_success:
