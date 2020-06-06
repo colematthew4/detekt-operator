@@ -6,11 +6,13 @@ dist: trusty
 jdk: oraclejdk8
 
 script:
+  - chmod +x gradlew
   - ./gradlew assemble
   - ./gradlew test
   - ./gradlew jacocoTestReport
   - bash <(curl -s https://codecov.io/bash)
 
+# From https://github.com/DiscordHooks/travis-ci-discord-webhook
 after_success:
   - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
   - chmod +x send.sh
