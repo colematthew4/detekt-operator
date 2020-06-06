@@ -5,15 +5,18 @@ os: linux
 dist: trusty
 jdk: oraclejdk8
 
-script:
+before_script:
   - chmod +x gradlew
+  - GRADLE_OPTS="-Dorg.gradle.daemon=true"
+
+script:
   - ./gradlew assemble
   - ./gradlew test
   - ./gradlew jacocoTestReport
-  - bash <(curl -s https://codecov.io/bash)
 
 # From https://github.com/DiscordHooks/travis-ci-discord-webhook
 after_success:
+  - bash <(curl -s https://codecov.io/bash)
   - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
   - chmod +x send.sh
   - ./send.sh success $WEBHOOK_URL
