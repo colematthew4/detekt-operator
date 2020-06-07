@@ -13,8 +13,8 @@ detekt-operator is a plugin for [detekt](https://github.com/arturbosch/detekt) t
     - [x] `a.unaryPlus()` -> `+a`
     - [x] `a.unaryMinus()` -> `-a`
     - [x] `a.not()` -> `!a`
-    - [ ] `a.inc()` -> `a++`
-    - [ ] `a.dec()` -> `a--`
+    - [x] `a.inc()` -> `a++`
+    - [x] `a.dec()` -> `a--`
 - [ ] Arithmetic Operators
     - [ ] `a.plus(b)` -> `a + b`
     - [ ] `a.minus(b)` -> `a - b`
