@@ -15,13 +15,13 @@ detekt-operator is a plugin for [detekt](https://github.com/arturbosch/detekt) t
     - [x] `a.not()` -> `!a`
     - [x] `a.inc()` -> `a++`
     - [x] `a.dec()` -> `a--`
-- [ ] Arithmetic Operators
-    - [ ] `a.plus(b)` -> `a + b`
-    - [ ] `a.minus(b)` -> `a - b`
-    - [ ] `a.times(b)` -> `a * b`
-    - [ ] `a.div(b)` -> `a / b`
-    - [ ] `a.rem(b)` -> `a % b`
-    - [ ] `a.rangeTo(b)` -> `a..b`
+- [x] Arithmetic Operators
+    - [x] `a.plus(b)` -> `a + b`
+    - [x] `a.minus(b)` -> `a - b`
+    - [x] `a.times(b)` -> `a * b`
+    - [x] `a.div(b)` -> `a / b`
+    - [x] `a.rem(b)` -> `a % b`
+    - [x] `a.rangeTo(b)` -> `a..b`
 - [x] `a.contains(b)` -> `b in a`
 - [ ] `a.get(i[, j...])` -> `a[i(, j...)]`
 - [ ] `a.invoke()` -> `a()`
