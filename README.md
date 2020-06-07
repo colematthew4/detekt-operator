@@ -9,12 +9,12 @@ detekt-operator is a plugin for [detekt](https://github.com/arturbosch/detekt) t
 
 ## Currently Supported Operators
 
-- [ ] Unary Operators
-    - [ ] `a.unaryPlus()` -> `+a`
-    - [ ] `a.unaryMinus()` -> `-a`
-    - [ ] `a.not()` -> `!a`
-- [ ] `a.inc()` -> `a++`
-- [ ] `a.dec()` -> `a--`
+- [x] Unary Operators
+    - [x] `a.unaryPlus()` -> `+a`
+    - [x] `a.unaryMinus()` -> `-a`
+    - [x] `a.not()` -> `!a`
+    - [ ] `a.inc()` -> `a++`
+    - [ ] `a.dec()` -> `a--`
 - [ ] Arithmetic Operators
     - [ ] `a.plus(b)` -> `a + b`
     - [ ] `a.minus(b)` -> `a - b`
@@ -24,7 +24,7 @@ detekt-operator is a plugin for [detekt](https://github.com/arturbosch/detekt) t
     - [ ] `a.rangeTo(b)` -> `a..b`
 - [x] `a.contains(b)` -> `b in a`
 - [ ] `a.get(i[, j...])` -> `a[i(, j...)]`
-- [ ] `a()` -> `a.invoke()`
+- [ ] `a.invoke()` -> `a()`
 - [ ] Augmented Assignments
     - [ ] `a.plusAssign(b)` -> `a += b`
     - [ ] `a.minusAssign(b)` -> `a -= b`
@@ -35,12 +35,26 @@ detekt-operator is a plugin for [detekt](https://github.com/arturbosch/detekt) t
     - [ ] `a.equals(b)` -> `a == b`
     - [ ] `!a.equals(b)` -> `a != b`
 - [ ] Infix functions
-
-### Potential Future
-
 - [ ] Comparison Operators
     - [ ] `a.compareTo(b)` -> `a > b`
     - [ ] `a.compareTo(b)` -> `a < b`
     - [ ] `a.compareTo(b)` -> `a >= b`
     - [ ] `a.compareTo(b)` -> `a <= b`
-- [ ] Property Delegation Operators
+
+## Include in your project
+
+### Detekt CLI
+
+```bash
+detekt --input ... --plugins /path/to/detekt-operator/jar
+```
+
+### Gradle
+
+```groovy
+dependencies {
+    detektPlugins "io.cole.matthew.detekt.operator:detekt-operator:0.0.1"
+}
+```
+
+If you are encountering issues, visit [detekt's documentation](https://detekt.github.io/detekt/extensions.html#pitfalls) or raise an issue!
