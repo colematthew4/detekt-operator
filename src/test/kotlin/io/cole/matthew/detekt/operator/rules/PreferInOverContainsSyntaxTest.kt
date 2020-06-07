@@ -1,25 +1,12 @@
 package io.cole.matthew.detekt.operator.rules
 
-import com.squareup.kotlinpoet.CodeBlock
-import com.squareup.kotlinpoet.FileSpec
-import com.squareup.kotlinpoet.FunSpec
-import com.squareup.kotlinpoet.TypeSpec
 import io.kotest.matchers.collections.shouldBeEmpty
 import io.kotest.matchers.collections.shouldHaveSize
+import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 
-internal class PreferInOverContainsSyntaxTest : DetektRuleTestBase() {
+internal class PreferInOverContainsSyntaxTest : DetektRuleTestBase("contains") {
     override val subject = PreferInOverContainsSyntax()
-
-    private fun buildCode(namedStatement: String, vararg namedArgPairs: Pair<String, *>): FileSpec {
-        return FileSpec.builder("", "CollectionContainsTest")
-            .addType(TypeSpec.classBuilder("CollectionContainsTest")
-                .addFunction(FunSpec.builder("test")
-                    .addCode(CodeBlock.builder().addNamed(namedStatement, mapOf(*namedArgPairs)).build())
-                    .build())
-                .build())
-            .build()
-    }
 
     @Test
     fun `reports if contains is used on collection`() {
