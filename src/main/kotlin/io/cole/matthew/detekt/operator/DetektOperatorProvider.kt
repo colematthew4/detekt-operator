@@ -1,6 +1,7 @@
 package io.cole.matthew.detekt.operator
 
 import io.cole.matthew.detekt.operator.rules.PreferInOverContainsSyntax
+import io.cole.matthew.detekt.operator.rules.PreferUnaryPostfixOverFunctionSyntax
 import io.cole.matthew.detekt.operator.rules.PreferUnaryPrefixOverFunctionSyntax
 import io.gitlab.arturbosch.detekt.api.Config
 import io.gitlab.arturbosch.detekt.api.RuleSet
@@ -11,6 +12,10 @@ class DetektOperatorProvider : RuleSetProvider {
 
     override fun instance(config: Config): RuleSet = RuleSet(
         ruleSetId,
-        listOf(PreferInOverContainsSyntax(), PreferUnaryPrefixOverFunctionSyntax())
+        listOf(
+            PreferInOverContainsSyntax(),
+            PreferUnaryPrefixOverFunctionSyntax(),
+            PreferUnaryPostfixOverFunctionSyntax()
+        )
     )
 }
