@@ -11,7 +11,7 @@ import io.gitlab.arturbosch.detekt.api.Severity
  *
  * Using <value1> operator <value2> is preferred (vs <value1>.op(<value2>)
  */
-abstract class PreferOperatorOverNamedFunctionSyntax(
+abstract class PreferOperatorOverNamedFunctionSyntaxBase(
     description: String,
     config: Config = Config.empty
 ) : Rule(config) {

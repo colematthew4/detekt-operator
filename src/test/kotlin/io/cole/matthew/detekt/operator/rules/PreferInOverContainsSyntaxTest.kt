@@ -1,25 +1,12 @@
 package io.cole.matthew.detekt.operator.rules
 
-import com.squareup.kotlinpoet.CodeBlock
-import com.squareup.kotlinpoet.FileSpec
-import com.squareup.kotlinpoet.FunSpec
-import com.squareup.kotlinpoet.TypeSpec
 import io.kotest.matchers.collections.shouldBeEmpty
 import io.kotest.matchers.collections.shouldHaveSize
+import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 
-internal class PreferInOverContainsSyntaxTest : DetektRuleTestBase() {
+internal class PreferInOverContainsSyntaxTest : DetektRuleTestBase("contains") {
     override val subject = PreferInOverContainsSyntax()
-
-    private fun buildCode(namedStatement: String, vararg namedArgPairs: Pair<String, *>): FileSpec {
-        return FileSpec.builder("", "CollectionContainsTest")
-            .addType(TypeSpec.classBuilder("CollectionContainsTest")
-                .addFunction(FunSpec.builder("test")
-                    .addCode(CodeBlock.builder().addNamed(namedStatement, mapOf(*namedArgPairs)).build())
-                    .build())
-                .build())
-            .build()
-    }
 
     @Test
     fun `reports if contains is used on collection`() {
@@ -29,8 +16,13 @@ internal class PreferInOverContainsSyntaxTest : DetektRuleTestBase() {
             "item" to 1
         )
 
-        compileAndLint(code.toString()).apply {
+        compileAndLint(code.toString()).run {
             this shouldHaveSize 1
+            with(this.first()) {
+                this.issue shouldBe subject.issue
+                this.messageOrDescription() shouldBe
+                        "The kotlin.collections.List.contains method can be replaced with the \"in\" operator."
+            }
         }
     }
 
@@ -42,7 +34,7 @@ internal class PreferInOverContainsSyntaxTest : DetektRuleTestBase() {
             "item" to 1
         )
 
-        compileAndLint(code.toString()).apply {
+        compileAndLint(code.toString()).run {
             this.shouldBeEmpty()
         }
     }
@@ -55,8 +47,13 @@ internal class PreferInOverContainsSyntaxTest : DetektRuleTestBase() {
             "item" to 1
         )
 
-        compileAndLint(code.toString()).apply {
+        compileAndLint(code.toString()).run {
             this shouldHaveSize 1
+            with(this.first()) {
+                this.issue shouldBe subject.issue
+                this.messageOrDescription() shouldBe
+                        "The kotlin.ranges.IntRange.contains method can be replaced with the \"in\" operator."
+            }
         }
     }
 
@@ -68,7 +65,7 @@ internal class PreferInOverContainsSyntaxTest : DetektRuleTestBase() {
             "item" to 1
         )
 
-        compileAndLint(code.toString()).apply {
+        compileAndLint(code.toString()).run {
             this.shouldBeEmpty()
         }
     }
@@ -81,8 +78,13 @@ internal class PreferInOverContainsSyntaxTest : DetektRuleTestBase() {
             "item" to "\"ll\""
         )
 
-        compileAndLint(code.toString()).apply {
+        compileAndLint(code.toString()).run {
             this shouldHaveSize 1
+            with(this.first()) {
+                this.issue shouldBe subject.issue
+                this.messageOrDescription() shouldBe
+                        "The kotlin.text.contains method can be replaced with the \"in\" operator."
+            }
         }
     }
 
@@ -94,7 +96,7 @@ internal class PreferInOverContainsSyntaxTest : DetektRuleTestBase() {
             "item" to "\"ll\""
         )
 
-        compileAndLint(code.toString()).apply {
+        compileAndLint(code.toString()).run {
             this.shouldBeEmpty()
         }
     }
@@ -107,7 +109,7 @@ internal class PreferInOverContainsSyntaxTest : DetektRuleTestBase() {
             "item" to "\"ll\""
         )
 
-        compileAndLint(code.toString()).apply {
+        compileAndLint(code.toString()).run {
             this.shouldBeEmpty()
         }
     }
@@ -120,8 +122,13 @@ internal class PreferInOverContainsSyntaxTest : DetektRuleTestBase() {
             "item" to "'c'"
         )
 
-        compileAndLint(code.toString()).apply {
+        compileAndLint(code.toString()).run {
             this shouldHaveSize 1
+            with(this.first()) {
+                this.issue shouldBe subject.issue
+                this.messageOrDescription() shouldBe
+                        "The kotlin.text.CharCategory.contains method can be replaced with the \"in\" operator."
+            }
         }
     }
 
@@ -133,7 +140,7 @@ internal class PreferInOverContainsSyntaxTest : DetektRuleTestBase() {
             "item" to "'c'"
         )
 
-        compileAndLint(code.toString()).apply {
+        compileAndLint(code.toString()).run {
             this.shouldBeEmpty()
         }
     }
