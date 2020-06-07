@@ -1,5 +1,6 @@
 package io.cole.matthew.detekt.operator
 
+import io.cole.matthew.detekt.operator.rules.PreferArithmeticSymbolSyntax
 import io.cole.matthew.detekt.operator.rules.PreferInOverContainsSyntax
 import io.cole.matthew.detekt.operator.rules.PreferUnaryPostfixOverFunctionSyntax
 import io.cole.matthew.detekt.operator.rules.PreferUnaryPrefixOverFunctionSyntax
@@ -15,7 +16,8 @@ class DetektOperatorProvider : RuleSetProvider {
         listOf(
             PreferInOverContainsSyntax(),
             PreferUnaryPrefixOverFunctionSyntax(),
-            PreferUnaryPostfixOverFunctionSyntax()
+            PreferUnaryPostfixOverFunctionSyntax(),
+            PreferArithmeticSymbolSyntax()
         )
     )
 }

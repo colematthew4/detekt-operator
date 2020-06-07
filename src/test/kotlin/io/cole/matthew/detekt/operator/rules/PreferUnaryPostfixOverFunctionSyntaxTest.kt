@@ -2,6 +2,7 @@ package io.cole.matthew.detekt.operator.rules
 
 import com.squareup.kotlinpoet.FileSpec
 import io.gitlab.arturbosch.detekt.api.Finding
+import io.kotest.matchers.collections.shouldBeEmpty
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.collections.shouldNotBeEmpty
 import io.kotest.matchers.shouldBe
@@ -74,6 +75,13 @@ internal class PreferUnaryPostfixOverFunctionSyntaxTest : DetektRuleTestBase("un
                     )
                 }
             }
+        }
+    }
+
+    @Test
+    fun `does not report if unary functions are not used`() {
+        compileAndLint(buildCode("toString", "1").toString()).run {
+            this.shouldBeEmpty()
         }
     }
 }
