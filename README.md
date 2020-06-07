@@ -23,7 +23,9 @@ detekt-operator is a plugin for [detekt](https://github.com/arturbosch/detekt) t
     - [x] `a.rem(b)` -> `a % b`
     - [x] `a.rangeTo(b)` -> `a..b`
 - [x] `a.contains(b)` -> `b in a`
-- [ ] `a.get(i[, j...])` -> `a[i(, j...)]`
+- [x] Index Accessor Operators
+    - [x] `a.get(i)` -> `a[i]`
+    - [x] `a.set(i, j)` -> `a[i, j]`
 - [ ] `a.invoke()` -> `a()`
 - [ ] Augmented Assignments
     - [ ] `a.plusAssign(b)` -> `a += b`
