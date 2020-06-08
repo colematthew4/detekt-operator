@@ -9,6 +9,33 @@ import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameOrNull
 import org.jetbrains.kotlin.util.OperatorNameConventions
 import org.jetbrains.kotlin.util.isValidOperator
 
+/**
+ * Similar to the ExplicitCollectionElementAccessMethod rule in detekt's base ruleset, but extended so all
+ * implementations of `get` and `set` can be replaced with the shorter operator - `[]`.
+ * See [https://kotlinlang.org/docs/reference/operator-overloading.html#indexed].
+ *
+ * Prefer the usage of the indexed access operator `[]` for all implementations of access or insert methods.
+ *
+ * <non-compliant>
+ *  val map = mutableMapOf<String, String>()
+ *  map.set("key", "value")
+ *  val value = map.get("key")
+ *  val newValue = StringBuilder(value).set(1, value.get(1).capitalize())
+ *  val array = arrayOf<Int>()
+ *  array.set(0, 3)
+ *  println(array.get(0))
+ * </non-compliant>
+ *
+ * <compliant>
+ *  val map = mutableMapOf<String, String>()
+ *  map["key"] = "value"
+ *  val value = map["key"]
+ *  val newValue = StringBuilder(value)[1, value[1].capitalize()]
+ *  val array = arrayOf<Int>()
+ *  array[0, 3]
+ *  println(array[0])
+ * </compliant>
+ */
 class PreferBracketAccessorOverFunctionSyntax : PreferOperatorOverNamedFunctionSyntaxBase(
     """
         An "index accessor" operator is referenced by its named function translation. 

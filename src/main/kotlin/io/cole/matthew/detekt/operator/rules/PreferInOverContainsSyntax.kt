@@ -8,6 +8,22 @@ import org.jetbrains.kotlin.resolve.calls.callUtil.getResolvedCall
 import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameOrNull
 import org.jetbrains.kotlin.util.OperatorNameConventions
 
+/**
+ * The Kotlin function `contains` can be replaced with a Python-like operator - `in`. This rule detects and reports the
+ * usage of `contains()` in the code.
+ *
+ * <non-compliant>
+ *  if (collection.contains(element) || string.contains(element)) {
+ *      println(element)
+ *  }
+ * </non-compliant>
+ *
+ * <compliant>
+ *  if (element in collection || element in string) {
+ *      println(element)
+ *  }
+ * </compliant>
+ */
 class PreferInOverContainsSyntax : PreferOperatorOverNamedFunctionSyntaxBase(
     """
         The "contains" operator is referenced by its named function translation. 
