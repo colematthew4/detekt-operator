@@ -1,6 +1,6 @@
 plugins {
     id "org.jetbrains.kotlin.jvm" version "1.3.72"
-    id "io.gitlab.arturbosch.detekt" version "1.5.1"
+    id "io.gitlab.arturbosch.detekt" version "1.9.1"
     id "jacoco"
 }
 
@@ -15,11 +15,11 @@ repositories {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-    implementation "io.gitlab.arturbosch.detekt:detekt-api:1.5.0"
+    implementation "io.gitlab.arturbosch.detekt:detekt-api:1.9.1"
 
     // test
-    testImplementation "io.gitlab.arturbosch.detekt:detekt-test:1.5.0"
-    testImplementation "io.gitlab.arturbosch.detekt:detekt-cli:1.5.0"
+    testImplementation "io.gitlab.arturbosch.detekt:detekt-test:1.9.1"
+    testImplementation "io.gitlab.arturbosch.detekt:detekt-cli:1.9.1"
     testImplementation "io.kotest:kotest-assertions-core-jvm:4.0.6"
     testImplementation "com.squareup:kotlinpoet:1.6.0"
 
@@ -45,4 +45,10 @@ jacocoTestReport {
         xml.enabled true
         html.enabled true
     }
+}
+
+detekt {
+    parallel = true
+    buildUponDefaultConfig = true
+    config = files("detekt.yml")
 }

@@ -9,6 +9,22 @@ import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameOrNull
 import org.jetbrains.kotlin.util.OperatorNameConventions
 import org.jetbrains.kotlin.util.isValidOperator
 
+/**
+ * The Kotlin functions `inc` and `dec` can be replaced with the traditional postfix increment and decrement operators -
+ * `++` and `--`. This rule detects and reports the usage of `inc()` and `dec()` in the code.
+ *
+ * <non-compliant>
+ *  while (index.inc() < size.dec()) {
+ *      println(index, size)
+ *  }
+ * </non-compliant>
+ *
+ * <compliant>
+ *  while (index++ < size--) {
+ *      println(index, size)
+ *  }
+ * </compliant>
+ */
 class PreferUnaryPostfixOverFunctionSyntax : PreferOperatorOverNamedFunctionSyntaxBase(
     """
         The unary postfix operators are referenced by their named function translation. 

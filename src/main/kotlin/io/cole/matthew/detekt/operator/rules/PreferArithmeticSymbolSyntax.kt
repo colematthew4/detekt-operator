@@ -9,13 +9,47 @@ import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameOrNull
 import org.jetbrains.kotlin.util.OperatorNameConventions
 import org.jetbrains.kotlin.util.isValidOperator
 
+/**
+ * This rule detects and reports instances in the code where the `plus()`, `minus()`, `times()`, `div()`, `rem()`,
+ * `mod()`, or `rangeTo()` methods are used to perform arithmetic operations.
+ *
+ * <non-compliant>
+ *  val counts = listOf(
+ *      size.plus(5)
+ *      size.minus(4)
+ *      size.times(3)
+ *      size.div(2)
+ *      size.rem(6)
+ *      size.mod(7)
+ *  )
+ *
+ *  for (value in 1.rangeTo(10)) {
+ *      println(value)
+ *  }
+ * </non-compliant>
+ *
+ * <compliant>
+ *  val counts = listOf(
+ *      size + 5
+ *      size - 4
+ *      size * 3
+ *      size / 2
+ *      size % 6
+ *      size % 7
+ *  )
+ *
+ *  for (value in 1..10) {
+ *      println(value)
+ *  }
+ * </compliant>
+ */
 class PreferArithmeticSymbolSyntax : PreferOperatorOverNamedFunctionSyntaxBase(
     """
         An arithmetic operator is referenced by its named function translation. 
         This can be replaced by <value2> [+-*/%(..)] <value1>.
     """.trimIndent()
 ) {
-    private val operatorSymbols = mapOf(
+    private val _operatorSymbols = mapOf(
         OperatorNameConventions.PLUS to "+",
         OperatorNameConventions.MINUS to "-",
         OperatorNameConventions.TIMES to "*",
@@ -33,7 +67,7 @@ class PreferArithmeticSymbolSyntax : PreferOperatorOverNamedFunctionSyntaxBase(
 
             if (descriptor.isValidOperator()) {
                 report(CodeSmell(issue, Entity.from(expression), "The ${descriptor.fqNameOrNull()} method can " +
-                        "be replaced with the \"${operatorSymbols[descriptor.name]}\" operator."))
+                        "be replaced with the \"${_operatorSymbols[descriptor.name]}\" operator."))
             }
         }
 

@@ -9,6 +9,23 @@ import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameOrNull
 import org.jetbrains.kotlin.util.OperatorNameConventions
 import org.jetbrains.kotlin.util.isValidOperator
 
+/**
+ * The Kotlin unary operations `unaryPlus`, `unaryMinus`, and `not` can be replaced with their traditional prefix
+ * operators - `+`, `-`, and `!`. This rule detects and reports the usage of `unaryPlus()`, `unaryMinus()`, and
+ * `not()` in the code.
+ *
+ * <non-compliant>
+ *  val index = 1
+ *  val negIndex = index.unaryMinus()
+ *  assert((index < negIndex).not())
+ * </non-compliant>
+ *
+ * <compliant>
+ *  val index = 1
+ *  val negIndex = -index
+ *  assert(!(index < negIndex))
+ * </compliant>
+ */
 class PreferUnaryPrefixOverFunctionSyntax : PreferOperatorOverNamedFunctionSyntaxBase(
     """
         The unary prefix operators are referenced by their named function translation. 

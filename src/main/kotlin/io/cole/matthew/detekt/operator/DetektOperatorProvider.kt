@@ -9,6 +9,9 @@ import io.gitlab.arturbosch.detekt.api.Config
 import io.gitlab.arturbosch.detekt.api.RuleSet
 import io.gitlab.arturbosch.detekt.api.RuleSetProvider
 
+/**
+ * The rule set provider responsible for providing the rules to execute.
+ */
 class DetektOperatorProvider : RuleSetProvider {
     override val ruleSetId: String = "detekt-operator"
 
