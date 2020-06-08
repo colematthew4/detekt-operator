@@ -1,7 +1,4 @@
 comments:
-  AbsentOrWrongFileLicense:
-    active: true
-    licenseTemplateFile: "license.template"
   EndOfSentenceFormat:
     active: true
     endOfSentenceFormat: "([.?!][ \t\n\r\f<])|([.?!:]$)"
@@ -54,7 +51,7 @@ exceptions:
       - NumberFormatException
       - ParseException
       - MalformedURLException
-      allowedExceptionNameRegex: "_|(ignore|expected).*"
+    allowedExceptionNameRegex: "_|(ignore|expected).*"
   ThrowingExceptionInMain:
     active: true
   ThrowingExceptionsWithoutMessageOrCause:
@@ -137,7 +134,7 @@ style:
     methods: []
   ForbiddenVoid:
     active: true
-    ignoreOverriden: false
+    ignoreOverridden: false
     ignoreUsageInGenerics: false
   MandatoryBracesIfStatements:
     active: true

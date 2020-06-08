@@ -15,7 +15,7 @@ class PreferArithmeticSymbolSyntax : PreferOperatorOverNamedFunctionSyntaxBase(
         This can be replaced by <value2> [+-*/%(..)] <value1>.
     """.trimIndent()
 ) {
-    private val operatorSymbols = mapOf(
+    private val _operatorSymbols = mapOf(
         OperatorNameConventions.PLUS to "+",
         OperatorNameConventions.MINUS to "-",
         OperatorNameConventions.TIMES to "*",
@@ -33,7 +33,7 @@ class PreferArithmeticSymbolSyntax : PreferOperatorOverNamedFunctionSyntaxBase(
 
             if (descriptor.isValidOperator()) {
                 report(CodeSmell(issue, Entity.from(expression), "The ${descriptor.fqNameOrNull()} method can " +
-                        "be replaced with the \"${operatorSymbols[descriptor.name]}\" operator."))
+                        "be replaced with the \"${_operatorSymbols[descriptor.name]}\" operator."))
             }
         }
 

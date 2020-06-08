@@ -50,4 +50,5 @@ jacocoTestReport {
 detekt {
     parallel = true
     buildUponDefaultConfig = true
+    config = files("detekt.yml")
 }
