@@ -21,6 +21,7 @@ dependencies {
     testImplementation "io.gitlab.arturbosch.detekt:detekt-test:1.9.1"
     testImplementation "io.gitlab.arturbosch.detekt:detekt-cli:1.9.1"
     testImplementation "io.kotest:kotest-assertions-core-jvm:4.0.6"
+    testImplementation "io.kotest:kotest-property-jvm:4.0.6"
     testImplementation "com.squareup:kotlinpoet:1.6.0"
 
     // junit

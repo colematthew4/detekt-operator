@@ -1,5 +1,6 @@
 package io.cole.matthew.detekt.operator.rules
 
+import io.kotest.inspectors.forAll
 import io.kotest.matchers.collections.shouldBeEmpty
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
@@ -26,8 +27,8 @@ internal class PreferBracketAccessorOverFunctionSyntaxTest : DetektRuleTestBase(
                 "shortArrayOf",
                 "listOf"
             ).map { func ->
-                buildCode("return %list:L.get(%index:L)", "list" to "$func(1, 2)", "index" to 1)
-            }.forEach { code ->
+                buildCode("return %list:L.get(%index:L)", mapOf("list" to "$func(1, 2)", "index" to 1)).build()
+            }.forAll { code ->
                 compileAndLint(code.toString()).run {
                     this shouldHaveSize 1
                     with(this.first()) {
@@ -42,11 +43,10 @@ internal class PreferBracketAccessorOverFunctionSyntaxTest : DetektRuleTestBase(
 
         @Test
         fun `reports if get is used on map`() {
-            val code = buildCode(
-                "return %list:L.get(%index:L)",
+            val code = buildCode("return %list:L.get(%index:L)", mapOf(
                 "list" to "mapOf(1 to 'a', 2 to 'b')",
                 "index" to 1
-            )
+            )).build()
 
             compileAndLint(code.toString()).run {
                 this shouldHaveSize 1
@@ -60,11 +60,10 @@ internal class PreferBracketAccessorOverFunctionSyntaxTest : DetektRuleTestBase(
 
         @Test
         fun `reports if get is used on string`() {
-            val code = buildCode(
-                "return %string:L.get(%index:L)",
+            val code = buildCode("return %string:L.get(%index:L)", mapOf(
                 "string" to "\"Hello World\"",
                 "index" to 1
-            )
+            )).build()
 
             compileAndLint(code.toString()).run {
                 this shouldHaveSize 1
@@ -93,12 +92,12 @@ internal class PreferBracketAccessorOverFunctionSyntaxTest : DetektRuleTestBase(
                 "shortArrayOf",
                 "mutableListOf"
             ).map { func ->
-                buildCode("return %list:L.set(%index:L, %item:L)",
+                buildCode("return %list:L.set(%index:L, %item:L)", mapOf(
                     "list" to "$func(1, 2)",
                     "index" to 0,
                     "item" to 1
-                )
-            }.forEach { code ->
+                )).build()
+            }.forAll { code ->
                 compileAndLint(code.toString()).run {
                     this shouldHaveSize 1
                     with(this.first()) {
@@ -113,12 +112,11 @@ internal class PreferBracketAccessorOverFunctionSyntaxTest : DetektRuleTestBase(
 
         @Test
         fun `reports if set is used on map`() {
-            val code = buildCode(
-                "return %map:L.set(%key:L, %value:L)",
+            val code = buildCode("return %map:L.set(%key:L, %value:L)", mapOf(
                 "map" to "mutableMapOf(1 to 'a', 2 to 'b')",
                 "key" to 3,
                 "value" to 'c'
-            )
+            )).build()
 
             compileAndLint(code.toString()).run {
                 this shouldHaveSize 1
@@ -132,12 +130,11 @@ internal class PreferBracketAccessorOverFunctionSyntaxTest : DetektRuleTestBase(
 
         @Test
         fun `reports if set is used on string builder`() {
-            val code = buildCode(
-                "return %string:L.set(%index:L, %item:L)",
+            val code = buildCode("return %string:L.set(%index:L, %item:L)", mapOf(
                 "string" to "StringBuilder()",
                 "index" to 0,
                 "item" to "\"ll\""
-            )
+            )).build()
 
             compileAndLint(code.toString()).run {
                 this shouldHaveSize 1
@@ -152,11 +149,10 @@ internal class PreferBracketAccessorOverFunctionSyntaxTest : DetektRuleTestBase(
 
     @Test
     fun `does not report if named index accessor functions are not used`() {
-        val code = buildCode(
-            "return %string:L.drop(%index:L)",
+        val code = buildCode("return %string:L.drop(%index:L)", mapOf(
             "string" to "\"Hello World\"",
             "index" to 1
-        )
+        )).build()
 
         compileAndLint(code.toString()).run {
             this.shouldBeEmpty()
